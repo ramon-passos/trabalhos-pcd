@@ -9,11 +9,6 @@ typedef struct {
 // Funcao que inicializa o primeiro
 // tabuleiro do jogo.
 void initializeGrid(float **grid) {
-  for (int i = 0; i < DIMENSION; i++) {
-    for (int j = 0; j < DIMENSION; j++) {
-      grid[i][j] = 0.0;
-    }
-  }
   int lin = 1, col = 1;
   grid[lin][col + 1] = 1.0;
   grid[lin + 1][col + 2] = 1.0;

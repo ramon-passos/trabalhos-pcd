@@ -52,6 +52,12 @@ int main() {
     readingGrid[i] = (float *)malloc(DIMENSION * sizeof(float));
   }
 
+  for (int i = 0; i < DIMENSION; i++) {
+    for (int j = 0; j < DIMENSION; j++) {
+      readingGrid[i][j] = 0.0;
+    }
+  }
+
   initializeGrid(readingGrid);
 
   // writingGrid refere-se ao tabuleiro da
