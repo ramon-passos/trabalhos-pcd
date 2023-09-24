@@ -1,13 +1,11 @@
 // Gabriel Schrader Vilas Boas, RA: 150981
-// João Pedro Assumpção Evaristo, RA:
-// Ramon da Silva Passos, RA:
+// João Pedro Assumpção Evaristo, RA: 147887
+// Ramon da Silva Passos, RA: 148011
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "common.h"
-
-
-#define GENERATIONS 10
+#define GENERATIONS 2000
 
 
 // Funcao que retorna o numero de celulas
@@ -23,25 +21,30 @@ int getAliveCells(float **grid) {
   return sum;
 }
 
+// Funcao para trocar os grids
+void swap(float ***readingGrid, float ***writingGrid) {
+  float **temp = *readingGrid;
+  *readingGrid = *writingGrid;
+  *writingGrid = temp;
+}
+
 // Funcao que itera sobre as geracoes
 // e altera os tabuleiros.
 void play(float **readingGrid, float **writingGrid) {
   int aux = 0;
   while (aux < GENERATIONS) {
-    printf("geracao %d\n", aux);
-    printf("Numero celulas vivas: %d\n", getAliveCells(readingGrid));
-    printGrid(readingGrid);
+    printf("%d\n", aux);
     for (int i = 0; i < DIMENSION; i++) {
       for (int j = 0; j < DIMENSION; j++) {
         assignCellValue(readingGrid, writingGrid, i, j);
       }
     }
-    readingGrid = writingGrid;
+    swap(&readingGrid, &writingGrid);
     aux++;
   }
 }
 
-int main(void) {
+int main() {
   // readingGrid refere-se ao tabuleiro da
   // geracao atual
   float **readingGrid = (float **)malloc(DIMENSION * sizeof(float *));
@@ -58,6 +61,6 @@ int main(void) {
     writingGrid[i] = (float *)malloc(DIMENSION * sizeof(float));
   }
   play(readingGrid, writingGrid);
-  Neighbors teste = getNeighbors(readingGrid, 0, 0);
+  printf("Numero celulas vivas: %d\n", getAliveCells(readingGrid));
   return 0;
 }
