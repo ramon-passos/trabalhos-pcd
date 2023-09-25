@@ -31,7 +31,6 @@ void create_threads(pthread_t *threads, int n, int length, void *(*func)(void *)
         offset->ini = b * i;
         offset->end = b * (i + 1) < length ? b * (i + 1) : length;
         offset->threadNumber = i;
-        printf("Thread %d: %d - %d\n", i, offset->ini, offset->end);
         pthread_create(&threads[i], NULL, func, offset);
     }
     return;
@@ -72,7 +71,7 @@ void *getAliveCellPerThread(void *args) {
         for (int j = 0; j < DIMENSION; j++)
         {
             if (readingGrid[i][j] > 0.0)
-                sum++;
+                sum = sum + 1;
         }
     }
 
@@ -118,7 +117,7 @@ void *playPerThread(void *args) {
 }
 
 
-void play(float **readingGrid, float **writingGrid)
+void play()
 {
     int aux = 0;
     while (aux < GENERATIONS)
@@ -166,9 +165,9 @@ int main()
         writingGrid[i] = (float *)malloc(DIMENSION * sizeof(float));
     }
 
-    fillZeros(readingGrid);
+    fillZeros();
     initializeGrid(readingGrid);
-    play(readingGrid, writingGrid);
-    printf("Numero celulas vivas: %d\n", getAliveCells(readingGrid));
+    play();
+    printf("Numero celulas vivas: %d\n", getAliveCells());
     return 0;
 }
