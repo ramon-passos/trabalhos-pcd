@@ -33,7 +33,7 @@ void printGrid(float **grid) {
       else if (grid[i][j] > 0.25 && grid[i][j] <= 0.5)
         printf("#");
       else if (grid[i][j] > 0.5 && grid[i][j] <= 0.75)
-        printf("%");
+        printf("%%");
       else if (grid[i][j] > 0.75)
         printf("@");
       else
@@ -102,4 +102,12 @@ void assignCellValue(float **readingGrid, float **writingGrid, int i, int j) {
   if (numNeighbors == 3 && !alive) {
     writingGrid[i][j] = 1.0;
   }
+}
+
+int ceil(double number) {
+    int aux = (int) number;
+    if(number > aux) {
+        return aux + 1;
+    }
+    return aux;
 }
