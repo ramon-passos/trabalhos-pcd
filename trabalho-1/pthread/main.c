@@ -5,8 +5,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <time.h>
 #include "common.h"
-#define GENERATIONS 5
+#define GENERATIONS 2000
 #define NUM_THREADS 4
 
 float **readingGrid;
@@ -120,6 +121,10 @@ void *playPerThread(void *args) {
 void play()
 {
     int aux = 0;
+    clock_t start, end;
+    double cpu_time_used;
+    start = clock();
+
     while (aux < GENERATIONS)
     {
         printf("%d\n", aux);
@@ -129,6 +134,10 @@ void play()
         swap(&readingGrid, &writingGrid);
         aux++;
     }
+
+    end = clock();
+    cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("Tempo de execução: %f\n", cpu_time_used);
 }
 
 void *fillZeroPerThread(void *args)
