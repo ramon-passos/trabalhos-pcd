@@ -123,6 +123,7 @@ void play()
     while (aux < GENERATIONS)
     {
         printf("%d\n", aux);
+        printGrid(readingGrid);
         parallelizeOperation(playPerThread);
         printf("Numero celulas vivas: %d. Geração: %d\n", getAliveCells(), aux);
         swap(&readingGrid, &writingGrid);
