@@ -12,31 +12,27 @@ int request = 0;
 
 void servidor()
 {
-    while (FOREVER)
+    while (SOMA < 30)
     {
         // pre protocolo
         while (request == 0);
         respond = request;
+        // regiao critica
         while (respond != 0);
         request = 0;
-        // printf("Servidor\n");
     }
 }
 
 void cliente(int numThread)
 {
-    while (FOREVER)
+    while (SOMA < 30)
     {
-        if (SOMA >= 30)
-            return;
-        // printf("Cliente %d\n", numThread);
         //  regiao critica
         int local = SOMA;
         sleep(rand() % 2);
         SOMA = local + 1;
-        printf("Soma = %d\n", SOMA);
+        printf("Thread %d - Soma = %d\n", numThread, SOMA);
         respond = 0;
-        // printf("Fim cliente %d\n", numThread);
     }
 }
 
