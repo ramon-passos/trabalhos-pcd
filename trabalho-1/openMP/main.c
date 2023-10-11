@@ -6,7 +6,7 @@
 #include <omp.h>
 #include <time.h>
 #include <stdlib.h>
-#define GENERATIONS 2000
+#define GENERATIONS 50
 
 //  Funcao que retorna o numero de celulas
 //  vivas no tabuleiro.
@@ -68,7 +68,6 @@ void play(float **readingGrid, float **writingGrid)
         aux++;
     }
     end = omp_get_wtime();
-    printf(" took %f seconds.\n", end - start);
 }
 
 int main(void)

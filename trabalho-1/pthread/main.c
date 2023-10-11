@@ -45,7 +45,8 @@ void join_threads(pthread_t *threads, int n)
     }
 }
 
-void parallelizeOperation(void *(*func)(void *)) {
+void parallelizeOperation(void *(*func)(void *))
+{
     pthread_t threads[NUM_THREADS];
 
     for (int t = 0; t < NUM_THREADS; t++)
@@ -59,7 +60,8 @@ void parallelizeOperation(void *(*func)(void *)) {
     }
 }
 
-void *getAliveCellPerThread(void *args) {
+void *getAliveCellPerThread(void *args)
+{
     arguments *offset = (arguments *)args;
     int ini = offset->ini;
     int end = offset->end;
@@ -78,7 +80,7 @@ void *getAliveCellPerThread(void *args) {
     aliveCellsMatrix[threadNumber] = sum;
 }
 
-int getAliveCells() //parallelize
+int getAliveCells() // parallelize
 {
     int sum = 0;
     parallelizeOperation(getAliveCellPerThread);
@@ -102,7 +104,8 @@ void swap(float ***readingGrid, float ***writingGrid)
 // Funcao que itera sobre as geracoes
 // e altera os tabuleiros.
 
-void *playPerThread(void *args) {
+void *playPerThread(void *args)
+{
     arguments *offset = (arguments *)args;
     int ini = offset->ini;
     int end = offset->end;
@@ -115,7 +118,6 @@ void *playPerThread(void *args) {
         }
     }
 }
-
 
 void play()
 {

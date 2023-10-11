@@ -5,15 +5,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "common.h"
-#define GENERATIONS 2000
-
+#define GENERATIONS 50
 
 // Funcao que retorna o numero de celulas
 // vivas no tabuleiro.
-int getAliveCells(float **grid) {
+int getAliveCells(float **grid)
+{
   int sum = 0;
-  for (int i = 0; i < DIMENSION; i++) {
-    for (int j = 0; j < DIMENSION; j++) {
+  for (int i = 0; i < DIMENSION; i++)
+  {
+    for (int j = 0; j < DIMENSION; j++)
+    {
       if (grid[i][j] > 0.0)
         sum++;
     }
@@ -22,7 +24,8 @@ int getAliveCells(float **grid) {
 }
 
 // Funcao para trocar os grids
-void swap(float ***readingGrid, float ***writingGrid) {
+void swap(float ***readingGrid, float ***writingGrid)
+{
   float **temp = *readingGrid;
   *readingGrid = *writingGrid;
   *writingGrid = temp;
@@ -30,12 +33,17 @@ void swap(float ***readingGrid, float ***writingGrid) {
 
 // Funcao que itera sobre as geracoes
 // e altera os tabuleiros.
-void play(float **readingGrid, float **writingGrid) {
+void play(float **readingGrid, float **writingGrid)
+{
   int aux = 0;
-  while (aux < GENERATIONS) {
+  while (aux < GENERATIONS)
+  {
     printf("%d\n", aux);
-    for (int i = 0; i < DIMENSION; i++) {
-      for (int j = 0; j < DIMENSION; j++) {
+    printGrid(readingGrid);
+    for (int i = 0; i < DIMENSION; i++)
+    {
+      for (int j = 0; j < DIMENSION; j++)
+      {
         assignCellValue(readingGrid, writingGrid, i, j);
       }
     }
@@ -44,16 +52,20 @@ void play(float **readingGrid, float **writingGrid) {
   }
 }
 
-int main() {
+int main()
+{
   // readingGrid refere-se ao tabuleiro da
   // geracao atual
   float **readingGrid = (float **)malloc(DIMENSION * sizeof(float *));
-  for (int i = 0; i < DIMENSION; i++) {
+  for (int i = 0; i < DIMENSION; i++)
+  {
     readingGrid[i] = (float *)malloc(DIMENSION * sizeof(float));
   }
 
-  for (int i = 0; i < DIMENSION; i++) {
-    for (int j = 0; j < DIMENSION; j++) {
+  for (int i = 0; i < DIMENSION; i++)
+  {
+    for (int j = 0; j < DIMENSION; j++)
+    {
       readingGrid[i][j] = 0.0;
     }
   }
@@ -63,7 +75,8 @@ int main() {
   // writingGrid refere-se ao tabuleiro da
   // geracao futura
   float **writingGrid = (float **)malloc(DIMENSION * sizeof(float *));
-  for (int i = 0; i < DIMENSION; i++) {
+  for (int i = 0; i < DIMENSION; i++)
+  {
     writingGrid[i] = (float *)malloc(DIMENSION * sizeof(float));
   }
   play(readingGrid, writingGrid);
