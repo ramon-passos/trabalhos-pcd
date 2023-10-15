@@ -2,7 +2,7 @@
 // João Pedro Assumpção Evaristo, RA: 147887
 // Ramon da Silva Passos, RA: 148011
 
-#include "../trabalho-1/openMP/common.h"
+#include "../../trabalho-1/openMP/common.h"
 #include <omp.h>
 #include <time.h>
 #include <stdlib.h>
