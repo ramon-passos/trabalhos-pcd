@@ -7,7 +7,7 @@
 
 
 #include <stdio.h>
-#include <mpi.h>
+#include "mpi.h"
 #include "common.h"
 #include <omp.h>
 #include <time.h>
@@ -46,5 +46,6 @@ int main(void)
     }
     play(readingGrid, writingGrid);
     printf("Numero celulas vivas: %d\n", getAliveCells(readingGrid));
+    MPI_Finalize();
     return 0;
 }
