@@ -16,16 +16,11 @@
 #define GENERATIONS 50
 #define DIMENSION 2048
 
-//  Funcao que retorna o numero de celulas
-//  vivas no tabuleiro.
+void workerProcess() {
 
-int main(void)
-{
-    MPI_Init(NULL, NULL);
-    int world_rank, world_size;
-    MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &world_size);
+}
 
+void masterProcess(int numProcesses) {
     // readingGrid refere-se ao tabuleiro da
     // geracao atual
     float **readingGrid = (float **)malloc(DIMENSION * sizeof(float *));
@@ -44,8 +39,24 @@ int main(void)
     {
         writingGrid[i] = (float *)malloc(DIMENSION * sizeof(float));
     }
+
     play(readingGrid, writingGrid);
     printf("Numero celulas vivas: %d\n", getAliveCells(readingGrid));
+}
+
+int main(void) {
+    int processId, numProcesses;
+
+    MPI_Init(NULL, NULL);
+    MPI_Comm_rank(MPI_COMM_WORLD, &processId);
+    MPI_Comm_size(MPI_COMM_WORLD, &numProcesses);
+
+    if(processId == 0) {
+        masterProcess(numProcesses);
+    } else {
+        workerProcess();
+    }
+
     MPI_Finalize();
     return 0;
 }
