@@ -15,6 +15,12 @@
 #define GENERATIONS 50
 #define DIMENSION 2048
 
+// MPI_Send definition
+// int MPI_Send(const void *buf, int count, MPI_Datatype datatype, int dest, int tag, MPI_Comm comm)
+
+// MPI_Recv definition
+// int MPI_Recv(void *buf, int count, MPI_Datatype datatype, int source, int tag, MPI_Comm comm, MPI_Status *status)
+
 void sendGridToWorkers(float **readingGrid, int numProcesses) {
     int i, j;
     for (i = 1; i < numProcesses; i++) {
